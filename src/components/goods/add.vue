@@ -58,7 +58,7 @@
                         </el-form-item>
                     </el-tab-pane>
                     <el-tab-pane label="商品属性" name="2">
-                        <el-form-item label="item.attr_name" v-for="item in onlyTableData" :key="item.attr_id">
+                        <el-form-item :label="item.attr_name" v-for="item in onlyTableData" :key="item.attr_id">
                             <el-input v-model="item.attr_vals"></el-input>
                         </el-form-item>
                     </el-tab-pane>
@@ -166,8 +166,7 @@ export default {
                 })
                 this.manyTableData = res.data
             } else if (this.activeIndex === '2') {
-                // 这里的数据请求返还404，一直查不出原因。。。
-                const {data: res} = await this.$http.get(`categorieSs/${this.cateId}/attributes`, {params: {sel: 'only'}})
+                const {data: res} = await this.$http.get(`categories/${this.cateId}/attributes`, {params: {sel: 'only'}})
                 console.log(res)
                 if (res.meta.status !== 200) {
                     return this.$message.error('获取静态属性数据失败！')
