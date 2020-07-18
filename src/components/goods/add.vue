@@ -105,7 +105,8 @@ export default {
                 goods_number: 0,
                 goods_cat: [],
                 pics: [],
-                goods_introduce: ''
+                goods_introduce: '',
+                attrs: []
             },
             addFormRules: {
                 goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
@@ -128,7 +129,6 @@ export default {
             },
             dialogVisible: false,
             previewPath: '',
-            attrs: []
         }
     },
     created() {
@@ -148,8 +148,6 @@ export default {
             }
         },
         beforeTabLeave(activeName, oldActiveName) {
-            // console.log(oldActiveName);
-            // console.log(activeName);
             if (oldActiveName === '0' && this.addForm.goods_cat.length !== 3) {
                 this.$message.error('请先选择商品分类！')
                 return false
@@ -167,7 +165,6 @@ export default {
                 this.manyTableData = res.data
             } else if (this.activeIndex === '2') {
                 const {data: res} = await this.$http.get(`categories/${this.cateId}/attributes`, {params: {sel: 'only'}})
-                console.log(res)
                 if (res.meta.status !== 200) {
                     return this.$message.error('获取静态属性数据失败！')
                 }
@@ -183,12 +180,10 @@ export default {
             const filePath = file.response.data.tmp_path
             const i = this.addForm.pics.findIndex( x => x.pic === filePath)
             this.addForm.pics.splice(i, 1)
-            console.log(this.addForm.pics);
         },
         handleSuccess(response) {
             const picInfo = {pic: response.data.tmp_path}
             this.addForm.pics.push(picInfo)
-            console.log(this.addForm.pics);
         },
         add() {
             this.$refs.addFormRef.validate(async valid => {
@@ -240,7 +235,7 @@ export default {
 .el-tabs {
     height: 500px;
 }
-.el-tabs[data-v-55d32688] {
+.el-tabs {
     height: auto;
 }
 .el-checkbox {

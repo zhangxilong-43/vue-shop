@@ -8,7 +8,7 @@
 
         <el-card>
             <el-button type="primary" @click="addRoleVisible = true">添加角色</el-button>
-            <el-table :data="rolesList" style="width: 100%" border stripe>
+            <el-table :data="rolesList" style="width: 100%" border stripe  row-key="id">
 
                 <el-table-column type="expand"> 
                     <template slot-scope="scope">

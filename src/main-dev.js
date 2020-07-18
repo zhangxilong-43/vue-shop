@@ -6,7 +6,8 @@ import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 import TreeTable from 'vue-table-with-tree-grid'
 import VueQuillEditor from 'vue-quill-editor'
-
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
@@ -17,8 +18,16 @@ Vue.component('tree-table', TreeTable)
 import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 Vue.prototype.$http = axios
+
+
 axios.interceptors.request.use(config => {
     config.headers.Authorization = window.sessionStorage.getItem('token')
+    NProgress.start()
+    return config
+})
+
+axios.interceptors.response.use(config => {
+    NProgress.done()
     return config
 })
 

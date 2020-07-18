@@ -61,7 +61,7 @@
                 </el-tab-pane>
 
                 <el-tab-pane label="静态属性" name="only" >
-                    <el-button type="primary" size="mini" :disabled="isBtnDisabled" @click="addDialogVisible = true">添加属性</el-button>
+                    <el-button type="primary" size="mini" :disabled="isBtnDisabled" @click="addDialogVisible = true" class="addBtn">添加属性</el-button>
                     <el-table :data="onlyTableData" border stripe>
                         <el-table-column type="expand">
 
